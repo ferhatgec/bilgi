@@ -5,6 +5,12 @@
 // * Kernel
 // * Username
 // * Hostname
+// * Language
+// * Terminal emulator
+// -----
+// * CPU
+// * CPU core/s
+// * CPU Vendor ID
 //
 // MIT License
 //

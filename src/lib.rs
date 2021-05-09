@@ -22,7 +22,13 @@ mod tests {
     #[test]
     fn system_infos() {
         let infos  = crate::system::sys::init();
-        let cpu_infos= crate::cpu::cpu::init();
+
+        let mut cpu_infos = crate::cpu::CPUInfos {
+            model_name: "".to_string(),
+            cores     : 0
+        };
+
+        cpu_infos.init();
 
         println!(
             "\
@@ -31,14 +37,16 @@ mod tests {
             Username: {}\n\
             Hostname: {}\n\
             --------\n\
-            CPU     : {}",
+            CPU     : {}\n\
+            Cores   : {}",
 
             infos.os_name,
             infos.kernel,
             infos.username,
             infos.hostname,
 
-            cpu_infos.model_name
+            cpu_infos.model_name,
+            cpu_infos.cores
         );
     }
 }

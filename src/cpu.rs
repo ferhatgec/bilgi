@@ -17,6 +17,7 @@ impl CPUInfos {
     }
 
     pub fn get_linux_cpu_infos(&mut self, file: &str) {
+        #[cfg(target_os = "linux")]
         if std::path::Path::new(file).exists() {
             if let Ok(lines) =
             crate::helpers::helpers::read_lines(file) {

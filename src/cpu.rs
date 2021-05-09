@@ -7,6 +7,7 @@
 
 pub struct CPUInfos {
     pub model_name: String,
+    pub vendor_id : String,
     pub cores     : u32
 }
 
@@ -21,9 +22,22 @@ impl CPUInfos {
             crate::helpers::helpers::read_lines(file) {
                 for line in lines {
                     if let Ok(ip) = line {
+                        if ip.starts_with('v') {
+                            if ip.contains("vendor_id") {
+                                self.vendor_id =
+                                    ip
+                                    .replace("vendor_id", "")
+                                    .replace(":", "")
+                                    .trim_start().to_string();
+                            }
+
+                            continue;
+                        }
+
                         if ip.starts_with('c') {
                             if ip.contains("cpu cores") {
-                                let mut ip = ip
+                                let ip =
+                                    ip
                                     .replace("cpu cores", "")
                                     .replace(":", "")
                                     .trim_start().to_string();
@@ -38,7 +52,8 @@ impl CPUInfos {
 
                         if ip.starts_with('m') {
                             if ip.contains("model name") {
-                                self.model_name = ip
+                                self.model_name =
+                                    ip
                                     .replace("model name", "")
                                     .replace(":", "")
                                     .trim_start().to_string();

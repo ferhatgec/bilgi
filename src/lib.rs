@@ -25,6 +25,7 @@ mod tests {
 
         let mut cpu_infos = crate::cpu::CPUInfos {
             model_name: "".to_string(),
+            vendor_id : "".to_string(),
             cores     : 0
         };
 
@@ -38,7 +39,8 @@ mod tests {
             Hostname: {}\n\
             --------\n\
             CPU     : {}\n\
-            Cores   : {}",
+            Cores   : {}\n\
+            VendorID: {}",
 
             infos.os_name,
             infos.kernel,
@@ -46,7 +48,8 @@ mod tests {
             infos.hostname,
 
             cpu_infos.model_name,
-            cpu_infos.cores
+            cpu_infos.cores,
+            cpu_infos.vendor_id
         );
     }
 }

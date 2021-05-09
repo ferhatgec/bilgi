@@ -10,7 +10,8 @@ pub struct SystemInfos {
     pub kernel  : String,
 
     pub username: String,
-    pub hostname: String
+    pub hostname: String,
+    pub language: String
 }
 
 pub mod sys {
@@ -22,7 +23,8 @@ pub mod sys {
             kernel  : get_kernel  (),
 
             username: get_username(),
-            hostname: get_hostname()
+            hostname: get_hostname(),
+            language: get_language()
         }
     }
 
@@ -90,6 +92,20 @@ pub mod sys {
             } else {
                 "COMPUTERNAME"
             }
+        ).unwrap()
+    }
+
+    pub fn get_language() -> String {
+        std::env::var(
+            if cfg!(target_os = "linux"    )
+                || cfg!(target_os = "freebsd"  )
+                || cfg!(target_os = "openbsd"  )
+                || cfg!(target_os = "macos"    )
+                || cfg!(target_os = "ios"      )
+                || cfg!(target_os = "dragonfly")
+                || cfg!(target_os = "netbsd"   ) {
+                "LANG"
+            } else { "" }
         ).unwrap()
     }
 }

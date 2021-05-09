@@ -37,6 +37,7 @@ mod tests {
             Kernel  : {}\n\
             Username: {}\n\
             Hostname: {}\n\
+            Language: {}\n\
             --------\n\
             CPU     : {}\n\
             Cores   : {}\n\
@@ -46,6 +47,7 @@ mod tests {
             infos.kernel,
             infos.username,
             infos.hostname,
+            infos.language,
 
             cpu_infos.model_name,
             cpu_infos.cores,

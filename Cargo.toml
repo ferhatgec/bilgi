@@ -1,0 +1,22 @@
+[package]
+name = "bilgi"
+version = "0.1.0"
+authors = ["\"ferhatgec\""]
+edition = "2018"
+description = "Cross-platform system information crate"
+keywords = ["cross-platform", "system", "sysinfo", "crate", "rust"]
+readme = "README.md"
+repository = "https://github.com/ferhatgec/bilgi"
+documentation = "https://docs.rs/bilgi"
+license = "MIT"
+
+include = [
+    ".gitignore",
+    "Cargo.toml",
+
+    "src/lib.rs",
+    "src/helpers.rs",
+    "src/system.rs"
+]
+
+[dependencies]

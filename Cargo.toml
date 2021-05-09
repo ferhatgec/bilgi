@@ -16,7 +16,8 @@ include = [
 
     "src/lib.rs",
     "src/helpers.rs",
-    "src/system.rs"
+    "src/system.rs",
+    "src/cpu.rs"
 ]
 
 [dependencies]

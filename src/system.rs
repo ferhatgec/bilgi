@@ -11,7 +11,8 @@ pub struct SystemInfos {
 
     pub username: String,
     pub hostname: String,
-    pub language: String
+    pub language: String,
+    pub emulator: (String, String)
 }
 
 pub mod sys {
@@ -24,7 +25,8 @@ pub mod sys {
 
             username: get_username(),
             hostname: get_hostname(),
-            language: get_language()
+            language: get_language(),
+            emulator: get_emulator()
         }
     }
 
@@ -97,16 +99,35 @@ pub mod sys {
 
     pub fn get_language() -> String {
         std::env::var(
-            if cfg!(target_os = "linux"    )
-                || cfg!(target_os = "freebsd"  )
-                || cfg!(target_os = "openbsd"  )
-                || cfg!(target_os = "macos"    )
-                || cfg!(target_os = "ios"      )
-                || cfg!(target_os = "dragonfly")
-                || cfg!(target_os = "netbsd"   ) {
+            if is_unix_like() {
                 "LANG"
             } else { "" }
         ).unwrap()
+    }
+
+    pub fn get_emulator() -> (String, String) {
+        (std::env::var(
+            if is_unix_like() {
+                "TERM"
+            } else { "" }
+        ).unwrap(),
+            match std::env::var("TERMINAL_EMULATOR") {
+                Ok(val)    => { val },
+                Err(_err) => { "".to_string() }
+            }
+        )
+    }
+
+    pub fn is_unix_like() -> bool {
+        return if cfg!(target_os = "linux"    )
+            || cfg!(target_os = "freebsd"  )
+            || cfg!(target_os = "openbsd"  )
+            || cfg!(target_os = "macos"    )
+            || cfg!(target_os = "ios"      )
+            || cfg!(target_os = "dragonfly")
+            || cfg!(target_os = "netbsd"   ) {
+            true
+        } else { false };
     }
 }
 

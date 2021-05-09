@@ -38,6 +38,7 @@ mod tests {
             Username: {}\n\
             Hostname: {}\n\
             Language: {}\n\
+            Term    : {}\n\
             --------\n\
             CPU     : {}\n\
             Cores   : {}\n\
@@ -48,6 +49,10 @@ mod tests {
             infos.username,
             infos.hostname,
             infos.language,
+
+            (if !infos.emulator.1.is_empty() {
+                infos.emulator.1
+            } else { infos.emulator.0 }),
 
             cpu_infos.model_name,
             cpu_infos.cores,
